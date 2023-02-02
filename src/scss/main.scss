@@ -1,0 +1,155 @@
+// Import Font Face
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Itim&display=swap");
+
+// Main Color Variables
+$thena197-main: #155e75;
+$thena197-alt: #231f20;
+
+// Breakpoint Mixin
+
+$min-xs: 375px;
+$min-sm: 576px;
+$min-md: 768px;
+$min-lg: 992px;
+$min-xl: 1200px;
+
+// min screen 375px
+@mixin min-xs {
+  @media screen and (min-width: $min-xs) {
+    @content;
+  }
+}
+
+// min screen 576px
+@mixin min-sm {
+  @media screen and (min-width: $min-sm) {
+    @content;
+  }
+}
+
+// min screen 768px
+@mixin min-md {
+  @media screen and (min-width: $min-md) {
+    @content;
+  }
+}
+
+// min screen 992px
+@mixin min-lg {
+  @media screen and (min-width: $min-lg) {
+    @content;
+  }
+}
+
+// min screen 1200px
+@mixin min-xl {
+  @media screen and (min-width: $min-xl) {
+    @content;
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+// Scroll bar custom
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $thena197-main;
+}
+
+// Main & Alt color classes
+
+.main-color {
+  color: $thena197-main;
+}
+
+.alt-color {
+  color: $thena197-alt;
+}
+
+.bg-main {
+  background: $thena197-main;
+}
+
+// Transform bigger x1.02 for product block
+@mixin bigger-block {
+  cursor: pointer;
+  transition: transform 0.4s ease-in-out;
+  &:hover {
+    transform: scale(1.02);
+  }
+}
+
+a {
+  font-family: "Inter", sans-serif;
+  text-decoration: none;
+  transition: opacity 0.2s ease-in-out;
+  &:focus {
+    outline: 0 solid;
+  }
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+label {
+  margin-bottom: 0;
+  font-family: "Inter", sans-serif;
+}
+
+html,
+body {
+  font-weight: 400;
+  font-family: "Inter", sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+body {
+  position: relative;
+  width: 100vw;
+}
+
+p {
+  font-family: "Inter", sans-serif;
+  margin-bottom: 0;
+  color: $thena197-alt;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.handwriting-font {
+  font-family: "Itim", cursive;
+}
