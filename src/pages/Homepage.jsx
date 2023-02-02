@@ -1,12 +1,13 @@
 import React from "react";
 import theNa197Profile from "./../images/profile/thena197-profile.jpg";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 export default function Homepage() {
   return (
     <div id="thena197-homepage">
-      <img
-        className="rounded w-1/2 md:w-1/6 block mx-auto mb-6"
+      <LazyLoadImage
         src={theNa197Profile}
+        className="rounded w-1/2 md:w-1/6 block mx-auto mb-6"
         alt="theNa197"
       />
       <div className="text-center mb-5">
