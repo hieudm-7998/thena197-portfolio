@@ -53,7 +53,7 @@ export default function Header() {
           </div>
         </div>
         <div className="nav-container">
-          <nav className="flex justify-center items-center gap-6 uppercase">
+          <nav className="flex justify-center items-center gap-5 md:gap-6 uppercase">
             <NavLink
               to={`/`}
               className={({ isActive }) =>
