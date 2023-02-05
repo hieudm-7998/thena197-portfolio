@@ -6,22 +6,26 @@ import {
   Route,
   useLocation,
 } from "react-router-dom";
+import { GitHubReposContextProvider } from "./pages/FilmPhotos/datacontext";
 import Header from "./components/Header";
 import Homepage from "./pages/Homepage";
 import FilmPhotos from "./pages/FilmPhotos";
+import FilmPhotosDetail from "./pages/FilmPhotos/FilmPhotosDetail";
 import Portrait from "./pages/Portrait";
 import Travel from "./pages/Travel";
 
 export default function App() {
   return (
-    <Router>
-      <div className="App">
-        <Header />
-        <div className="container mx-auto py-5">
-          <Content />
+    <GitHubReposContextProvider>
+      <Router>
+        <div className="App">
+          <Header />
+          <div className="container mx-auto py-5">
+            <Content />
+          </div>
         </div>
-      </div>
-    </Router>
+      </Router>
+    </GitHubReposContextProvider>
   );
 }
 
@@ -48,6 +52,7 @@ function Content() {
       <Routes location={displayLocation}>
         <Route path="/" element={<Homepage />} />
         <Route path="/film-photos" element={<FilmPhotos />} />
+        <Route path="film-photos/:projectName" element={<FilmPhotosDetail />} />
         <Route path="/portrait" element={<Portrait />} />
         <Route path="/travel" element={<Travel />} />
       </Routes>

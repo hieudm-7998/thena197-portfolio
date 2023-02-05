@@ -10,8 +10,8 @@ export default function FilmPhotos() {
 
   return (
     <div id="thena197-filmphotos">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {FilmPhotosData.map((item) => {
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {FilmPhotosData?.map((item) => {
           return (
             <div
               key={item.id}
