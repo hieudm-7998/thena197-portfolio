@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useGitHubRepos } from "./datacontext";
-// import { LazyLoadImage } from "react-lazy-load-image-component";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import Masonry from "@mui/lab/Masonry";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
 
 export default function FilmPhotosDetail() {
   const { gitHubRepos } = useGitHubRepos();
@@ -36,14 +34,23 @@ export default function FilmPhotosDetail() {
     <>
       {currentRepo ? (
         <>
-          <h2>Repo name:{currentRepo.tag}</h2>
-          <span>Id: {currentRepo.id}</span>
-          <Masonry>
+          <h2 className="text-center text-2xl text-cyan-800 mb-5">
+            {currentRepo.title} by nana xing xắng
+          </h2>
+          {/* <span>Id: {currentRepo.id}</span> */}
+          <Masonry
+            columns={{ xs: 2, sm: 2, md: 3 }}
+            spacing={{ xs: 1, sm: 1, md: 2 }}
+          >
             {currentRepo.gallery &&
               currentRepo.gallery.map &&
               currentRepo.gallery.map((image, index) => (
                 <div key={index} onClick={() => handleClick(image.url)}>
-                  <img src={image.url} alt={`img-${index}`} />
+                  <LazyLoadImage
+                    className="cursor-pointer hover:opacity-80 transition"
+                    src={image.url}
+                    alt={`img-${index}`}
+                  />
                 </div>
               ))}
           </Masonry>
