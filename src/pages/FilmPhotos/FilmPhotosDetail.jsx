@@ -3,8 +3,8 @@ import { useParams } from "react-router-dom";
 import { useGitHubRepos } from "./datacontext";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import Masonry from "@mui/lab/Masonry";
-import Modal from "@mui/material/Modal";
-import Box from "@mui/material/Box";
+import { CSSTransition } from "react-transition-group";
+import Modal from "react-modal";
 
 export default function FilmPhotosDetail() {
   const { gitHubRepos } = useGitHubRepos();
@@ -14,9 +14,25 @@ export default function FilmPhotosDetail() {
   const [selectedImage, setSelectedImage] = useState(null);
   const [openModal, setOpenModal] = useState(false);
 
+  const customStyles = {
+    content: {
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      width: "100%",
+      height: "100%",
+      transform: "translate(-50%, -50%)",
+    },
+  };
+
   const handleClick = (image) => {
     setSelectedImage(image);
     setOpenModal(true);
+  };
+
+  const closeModal = () => {
+    setOpenModal(false);
   };
 
   useEffect(() => {
@@ -34,8 +50,8 @@ export default function FilmPhotosDetail() {
     <>
       {currentRepo ? (
         <>
-          <h2 className="text-center text-2xl text-cyan-800 mb-5">
-            {currentRepo.title} by nana xing xắng
+          <h2 className="text-center text-2xl text-cyan-800 mb-10">
+            {currentRepo.title}
           </h2>
           {/* <span>Id: {currentRepo.id}</span> */}
           <Masonry
@@ -54,44 +70,74 @@ export default function FilmPhotosDetail() {
                 </div>
               ))}
           </Masonry>
-          {selectedImage && (
-            <CustomModal
-              currentImage={selectedImage}
-              onClose={() => setSelectedImage(null)}
-              openModal={openModal}
-            />
-          )}
         </>
       ) : (
         "Loading..."
+      )}
+      {selectedImage && (
+        <CSSTransition in={openModal} timeout={300}>
+          <Modal
+            isOpen={openModal}
+            onRequestClose={closeModal}
+            style={customStyles}
+            ariaHideApp={false}
+          >
+            <div>
+              <div className="flex flex-row-reverse">
+                <button onClick={closeModal}>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="w-6 h-6"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                </button>
+              </div>
+
+              <img
+                className="gallery-modal-image block mx-auto"
+                src={selectedImage}
+                alt={selectedImage}
+              />
+            </div>
+          </Modal>
+        </CSSTransition>
       )}
     </>
   );
 }
 
-function CustomModal({ openModal, currentImage }) {
-  const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: 400,
-    bgcolor: "background.paper",
-    border: "2px solid #000",
-    boxShadow: 24,
-    p: 4,
-    outline: 0,
-  };
+// function CustomModal({ openModal, currentImage }) {
+//   const style = {
+//     position: "absolute",
+//     top: "50%",
+//     left: "50%",
+//     transform: "translate(-50%, -50%)",
+//     width: 400,
+//     bgcolor: "background.paper",
+//     border: "2px solid #000",
+//     boxShadow: 24,
+//     p: 4,
+//     outline: 0,
+//   };
 
-  return (
-    <Modal
-      open={openModal}
-      aria-labelledby="modal-modal-title"
-      aria-describedby="modal-modal-description"
-    >
-      <Box sx={style}>
-        <img src={currentImage} alt="abc" />
-      </Box>
-    </Modal>
-  );
-}
+//   return (
+//     <Modal
+//       open={openModal}
+//       aria-labelledby="modal-modal-title"
+//       aria-describedby="modal-modal-description"
+//     >
+//       <Box sx={style}>
+//         <img src={currentImage} alt="abc" />
+//       </Box>
+//     </Modal>
+//   );
+// }

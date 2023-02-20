@@ -216,3 +216,24 @@ input[type="number"] {
   background: grey;
   margin-bottom: 30px;
 }
+
+.ReactModal__Overlay {
+  opacity: 0;
+  overflow-x: hidden !important;
+  background: rgba(0, 0, 0, 0.2);
+  transition: all 300ms ease-in-out;
+}
+
+.ReactModal__Overlay--after-open {
+  opacity: 1;
+}
+
+.ReactModal__Overlay--before-close {
+  opacity: 0;
+}
+
+.gallery-modal-image {
+  max-height: calc(100vh / 1.5);
+  margin-top: 120px;
+  width: auto;
+}
